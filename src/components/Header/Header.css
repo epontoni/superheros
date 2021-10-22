@@ -1,0 +1,24 @@
+.brand {
+    position: relative;
+    
+}
+
+nav a {
+    text-decoration: none;
+    color: unset;
+}
+
+.brand:before {
+    content: 'My';
+    font-size: .75rem;
+    position: absolute;
+    top: -.75rem;
+}
+.brand:after {
+    content: 'League';
+    font-size: 1rem;
+    font-weight: bold;
+    position: absolute;
+    bottom: -1rem;
+    right: 0;
+}
