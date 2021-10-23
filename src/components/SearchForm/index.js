@@ -3,7 +3,7 @@ import { Formik } from "formik"
 import { useLocation } from "wouter"
 
 const SearchForm = () => {
-    const [path, pushLocation] = useLocation()
+    const [path, pushLocation] = useLocation() // eslint-disable-line
     return (
         <Formik
             initialValues={{

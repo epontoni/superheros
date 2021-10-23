@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { Formik } from "formik"
 import { Alert, Button, Form } from "react-bootstrap"
-//import getLoginToken from "../../services/getLoginToken"
 import axios from "axios"
 import { useLocation } from "wouter"
 import { useDispatch } from "react-redux"
@@ -9,7 +8,7 @@ import { logInUser } from "../../actions"
 
 const LoginForm = () => {
     const [authorized, setAuthorized] = useState('')
-    const [location, setLocation] = useLocation()
+    const [location, setLocation] = useLocation() // eslint-disable-line
     const dispatch = useDispatch()
     return (
         <Formik
@@ -39,8 +38,6 @@ const LoginForm = () => {
                     email: values.email,
                     password: values.password
                 }
-
-                //console.log(`Enviando formulario con los datos: email ${values.email} y password: ${values.password}`)
                 
                 axios
                   .post("http://challenge-react.alkemy.org", credentials)
@@ -53,7 +50,6 @@ const LoginForm = () => {
                       )
                       dispatch(logInUser())
                       setLocation('/')
-                      //console.log(data, token)
                   })
                   .catch((e) => {
                     console.log(e.response.data.error);

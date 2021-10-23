@@ -1,8 +1,5 @@
-//import { useState } from "react"
 import { useSelector } from "react-redux"
-//import { Spinner } from "react-bootstrap"
 import { useRoute } from "wouter"
-//import getSuperheros from "../../services/getSuperheros"
 import Hero from '../Hero'
 import Powerstats from "../Powerstats"
 import './HeroLeague.css'
@@ -11,7 +8,7 @@ function HeroLeague({league}) {
     //const [loading, setLoading] = useState(false)
     //const [team, setTeam] = useState(league)
     const team = useSelector(state => state.app.league)
-    const [matchPath, params] = useRoute('/')
+    const [matchPath, params] = useRoute('/') // eslint-disable-line
 
     const sumPowers = (heros, power) => {
         return heros
@@ -74,10 +71,3 @@ function HeroLeague({league}) {
   }
   
 export default HeroLeague
-
-
-/*
-loading
-? (<Spinner animation="grow" variant="primary" />)
-: <Hero sh={superheros}/>
-*/

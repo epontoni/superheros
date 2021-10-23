@@ -1,24 +1,18 @@
-import { Col, Container, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import './App.css'
 import Header from './components/Header'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 
 
-import { Route, Switch, useLocation } from 'wouter'
+import { Route, Switch } from 'wouter'
 import SearchResultsPage from './pages/SearchResultsPage'
 import DetailPage from './pages/DetailPage'
 import NotFound from './pages/NotFound'
-import { useDispatch } from 'react-redux'
-//import { logOutUser } from './actions'
 import LogoutPage from './pages/LogoutPage'
 import AppAlert from './components/AppAlert'
-//import { useSelector } from 'react-redux'
 
 function App() {
-    //const dispatch = useDispatch()
-    //const [location, setLocation] = useLocation()
-    // const isAuthenticated = useSelector(state => state.app.isAuthenticated)
   return (
       <>
         <Header />

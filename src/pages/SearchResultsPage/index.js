@@ -16,7 +16,7 @@ const SearchResultsPage = ({params}) => {
             .catch(e => {
                 setResults(['No se encontraron resultados'])
             })
-    }, [params.keyword])
+    }, [params.keyword]) // eslint-disable-line
     
     return (<>
         <Row className="d-flex justify-content-center">

@@ -4,17 +4,14 @@ import Powerstats from "../Powerstats";
 
 import { useDispatch, useSelector } from 'react-redux'
 import { addHeroToLeague, eraseHero, showAlert } from '../../actions'
-import { useState } from "react";
 import HeroDescription from "../HeroDescription";
 
 
 function Hero({sh}) {
     const [location, setLocation] = useLocation()
-    const [match, params] = useRoute('/')
+    const [match, params] = useRoute('/') // eslint-disable-line
     const dispatch = useDispatch()
     const league = useSelector(state => state.app.league)
-    //const error = useSelector(state => state.app.alert.alert)
-    //const [alert, setAlert] = useState(null)
 
     const addHero = (sh) => {
         

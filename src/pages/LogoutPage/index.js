@@ -5,7 +5,7 @@ import { logOutUser } from "../../actions"
 import CaptainKwik from './CaptainKwik.png'
 
 export default function LogoutPage() {
-    const [location, setLocation] = useLocation()
+    const [location, setLocation] = useLocation() // eslint-disable-line
     const dispatch = useDispatch()
     useEffect(() => {
         window.localStorage.removeItem('loggedAppUser')
@@ -13,7 +13,7 @@ export default function LogoutPage() {
         setTimeout( ()=> {
             setLocation('/login')
         }, 5000)
-    }, [])
+    }, []) // eslint-disable-line
     return (
         <div>
             <h2>Login out...</h2>
