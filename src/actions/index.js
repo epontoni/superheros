@@ -19,3 +19,8 @@ export const logOutUser = () => ({
     type: types.LOG_OUT_USER,
     payload: false,
 })
+
+export const showAlert = (alert) => ({
+    type: types.SHOW_ALERT,
+    payload: alert,
+})

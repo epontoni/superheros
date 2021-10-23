@@ -1,9 +1,9 @@
-import { Alert, Button, Card } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { useLocation, useRoute } from "wouter";
 import Powerstats from "../Powerstats";
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addHeroToLeague, eraseHero } from '../../actions'
+import { addHeroToLeague, eraseHero, showAlert } from '../../actions'
 import { useState } from "react";
 import HeroDescription from "../HeroDescription";
 
@@ -13,36 +13,44 @@ function Hero({sh}) {
     const [match, params] = useRoute('/')
     const dispatch = useDispatch()
     const league = useSelector(state => state.app.league)
-    const [alert, setAlert] = useState(null)
+    //const error = useSelector(state => state.app.alert.alert)
+    //const [alert, setAlert] = useState(null)
 
     const addHero = (sh) => {
-        if( league.length > 6 ){
-            console.log('Su equipo sólo puede contener como máximo 6 héroes.')
-            setAlert('Su equipo sólo puede contener como máximo 6 héroes.')
-            setTimeout( () => {
-                setAlert(null)
-            }, 5000)
-            return;
-        }
-
-        if (league.filter( hero => hero.id === sh.id).length > 0){
-            setAlert('Este héroe ya se encuentra en su equipo.')
-            setTimeout( () => {
-                setAlert(null)
-            }, 5000)
-        }
-
-        if(league.filter( hero => hero.biography.alignment === 'good').length > 3 || league.filter( hero => hero.biography.alignment === 'bad').length > 3) {
-            setAlert('Su equipo debe estar compuesto por tres héroes con orientación buena y tres con orientación mala.')
-            setTimeout( () => {
-                setAlert(null)
-            }, 5000)
-        }
         
-        if (!alert) {
+        if( league.length > 5 ){
+            dispatch(showAlert({ alert: true, message: 'Su equipo sólo puede contener como máximo 6 héroes.'}))
+            setTimeout( () => {
+                dispatch(showAlert({ alert: false, message: ''}))
+            }, 5000)
+        }
+
+        if( league.filter( hero => hero.id === sh.id).length > 0 ){
+            dispatch(showAlert({ alert: true, message: 'Este héroe ya se encuentra en su equipo.'}))
+            setTimeout( () => {
+                dispatch(showAlert({ alert: false, message: ''}))
+            }, 5000)
+        }
+
+        if( sh.biography.alignment === 'good' && league.filter( hero => hero.biography.alignment === 'good').length >= 3  ){
+            dispatch(showAlert({ alert: true, message: 'Su equipo debe estar compuesto por tres héroes con orientación buena. Límite superado.'}))
+            setTimeout( () => {
+                dispatch(showAlert({ alert: false, message: ''}))
+            }, 5000)
+        }
+
+        if( sh.biography.alignment === 'bad' && league.filter( hero => hero.biography.alignment === 'bad').length >= 3 ){
+            dispatch(showAlert({ alert: true, message: 'Su equipo debe estar compuesto por tres héroes con orientación mala. Límite superado.'}))
+            setTimeout( () => {
+                dispatch(showAlert({ alert: false, message: ''}))
+            }, 5000)
+        }
+
+        if( league.length < 6 && league.filter( hero => hero.id === sh.id).length === 0 && ((sh.biography.alignment === 'good' && league.filter( hero => hero.biography.alignment === 'good').length <= 3) || ( sh.biography.alignment === 'bad' && league.filter( hero => hero.biography.alignment === 'bad').length <= 3))) {
             dispatch(addHeroToLeague(sh))
             setLocation('/')
         }
+
     }
 
     const deleteHero = (heroId) => {
@@ -51,11 +59,11 @@ function Hero({sh}) {
 
     return (
         <> 
-            <Card className="my-2">
+            <Card className="my-2" style={{maxWidth: '350px', margin: '0 auto'}}>
                 <Card.Img variant="top" src={ sh.image ? sh.image.url : ''} />
                 <Card.Body className="text-dark">
                     <Card.Title className="text-center">{sh.name}</Card.Title>
-                    <Card.Text className="lead" style={{ fontSize: '1rem' }}>
+                    <div className="lead" style={{ fontSize: '1rem' }}>
                         {
                             location.startsWith('/search/')
                             ? (
@@ -68,7 +76,7 @@ function Hero({sh}) {
                                     : null
                             )
                         }
-                    </Card.Text>
+                    </div>
                 </Card.Body>
                 {
                     match
@@ -96,13 +104,6 @@ function Hero({sh}) {
                         )
                 }
             </Card>
-            {
-                alert
-                    ? (
-                        <Alert variant='danger'>{alert}</Alert>
-                    )
-                    :null
-            }
         </>
     )
 }

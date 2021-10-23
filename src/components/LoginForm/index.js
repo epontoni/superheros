@@ -52,7 +52,7 @@ const LoginForm = () => {
                           'loggedAppUser', JSON.stringify({...email , token})
                       )
                       dispatch(logInUser())
-                      //setLocation('/')
+                      setLocation('/')
                       //console.log(data, token)
                   })
                   .catch((e) => {

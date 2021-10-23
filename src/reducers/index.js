@@ -4,6 +4,10 @@ const initialState = {
     league: [],
     loading: false,
     isAuthenticated: false,
+    alert: {
+        alert: false,
+        message: ''
+    },
 }
 
 export const heroReducer = (state = initialState, action) => {
@@ -27,6 +31,11 @@ export const heroReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isAuthenticated: false,
+            }
+        case actionType.SHOW_ALERT:
+            return {
+                ...state,
+                alert: action.payload, // Al realizar el dispatch, debo enviar { alert: true, message: 'The alert message' }
             }
         default:
             return state

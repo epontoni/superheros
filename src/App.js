@@ -12,6 +12,7 @@ import NotFound from './pages/NotFound'
 import { useDispatch } from 'react-redux'
 //import { logOutUser } from './actions'
 import LogoutPage from './pages/LogoutPage'
+import AppAlert from './components/AppAlert'
 //import { useSelector } from 'react-redux'
 
 function App() {
@@ -21,8 +22,12 @@ function App() {
   return (
       <>
         <Header />
-        <Container fluid className='App d-flex justify-content-center'>
+        <Container fluid className='App'>
             <Row>
+                <AppAlert />
+            </Row>
+            
+            <Row style={{maxWidth: '1200px', margin: '0 auto'}}>
                     <Switch>
                         <Route
                             component={HomePage}
