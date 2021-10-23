@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useLocation } from "wouter"
 import { logOutUser } from "../../actions"
-import apu from './apu.png'
+import CaptainKwik from './CaptainKwik.png'
 
 export default function LogoutPage() {
     const [location, setLocation] = useLocation()
@@ -17,7 +17,7 @@ export default function LogoutPage() {
     return (
         <div>
             <h2>Login out...</h2>
-            <img src={apu} alt="Vuelva prontos" style={ { maxWidth: '500px' } }/>
+            <img src={CaptainKwik} alt="Vuelva prontos" style={ { maxWidth: '500px', width: '100%' } }/>
         </div>
     )
 }

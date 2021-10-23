@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Col, Row } from "react-bootstrap"
 import Hero from "../../components/Hero"
 import getSuperhero from "../../services/getSuperhero"
 
@@ -18,7 +19,11 @@ const DetailPage = ({params}) => {
     }, [params.id])
     
     return (<>
-        {superhero ? <Hero sh={superhero}/> : null}
+        <Row>
+            <Col>
+                {superhero ? <Hero sh={superhero}/> : null}
+            </Col>
+        </Row>
     </>)
 }
 

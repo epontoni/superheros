@@ -105,7 +105,7 @@ const LoginForm = () => {
                 </Form.Group>
                 <div className="d-grid gap-2">
                     <Button variant="primary" type="submit" size="lg">
-                        Submit
+                        Log in!
                     </Button>
                 </div>
                 {

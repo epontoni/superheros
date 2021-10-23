@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const ACCESS_TOKEN = '10208995463121973'
+import { ACCESS_TOKEN } from './access'
 
 export default function getSuperhero ({ id = '1'} = {}) {
     const BASE_URL = `/api/${ACCESS_TOKEN}/${id}`

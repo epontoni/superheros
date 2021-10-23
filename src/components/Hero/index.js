@@ -17,10 +17,12 @@ function Hero({sh}) {
 
     const addHero = (sh) => {
         if( league.length > 6 ){
+            console.log('Su equipo sólo puede contener como máximo 6 héroes.')
             setAlert('Su equipo sólo puede contener como máximo 6 héroes.')
             setTimeout( () => {
                 setAlert(null)
             }, 5000)
+            return;
         }
 
         if (league.filter( hero => hero.id === sh.id).length > 0){
@@ -39,7 +41,7 @@ function Hero({sh}) {
         
         if (!alert) {
             dispatch(addHeroToLeague(sh))
-
+            setLocation('/')
         }
     }
 
@@ -49,7 +51,7 @@ function Hero({sh}) {
 
     return (
         <> 
-            <Card style={{ maxWidth: '10rem' }} className="my-2">
+            <Card className="my-2">
                 <Card.Img variant="top" src={ sh.image ? sh.image.url : ''} />
                 <Card.Body className="text-dark">
                     <Card.Title className="text-center">{sh.name}</Card.Title>
@@ -57,7 +59,9 @@ function Hero({sh}) {
                         {
                             location.startsWith('/search/')
                             ? (
-                                <Powerstats powerstats={sh.powerstats} />
+                                <ul>
+                                    <Powerstats powerstats={sh.powerstats} />
+                                </ul>
                             ) : (
                                 location.startsWith('/hero/')
                                     ? (<HeroDescription sh={sh} />)
@@ -74,18 +78,22 @@ function Hero({sh}) {
                                     variant="primary"
                                     onClick={ () => { setLocation(`/hero/${sh.id}`)}}
                                 >
-                                    Ver detalles
+                                    See details
                                 </Button>
                                 <Button
                                     variant="primary"
                                     className="mt-2"
                                     onClick={ () => deleteHero(sh.id) }
                                 >
-                                    Eliminar del equipo
+                                    Delete from league
                                 </Button>
                             </>
                         )
-                        : (<Button variant="primary" onClick={ () => addHero(sh) }>Añadir al equipo</Button>)
+                        : (
+                            location.startsWith('/hero/')
+                            ? (<Button variant="primary" onClick={ () => setLocation('/') }>Back to the league</Button>)
+                            : (<Button variant="primary" onClick={ () => addHero(sh) }>Add to league</Button>)
+                        )
                 }
             </Card>
             {

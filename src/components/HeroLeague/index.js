@@ -1,13 +1,14 @@
-import { useState } from "react"
+//import { useState } from "react"
 import { useSelector } from "react-redux"
 //import { Spinner } from "react-bootstrap"
 import { useRoute } from "wouter"
 //import getSuperheros from "../../services/getSuperheros"
 import Hero from '../Hero'
 import Powerstats from "../Powerstats"
+import './HeroLeague.css'
 
 function HeroLeague({league}) {
-    const [loading, setLoading] = useState(false)
+    //const [loading, setLoading] = useState(false)
     //const [team, setTeam] = useState(league)
     const team = useSelector(state => state.app.league)
     const [matchPath, params] = useRoute('/')
@@ -15,7 +16,14 @@ function HeroLeague({league}) {
     const sumPowers = (heros, power) => {
         return heros
                 .map( function(hero) { return hero.powerstats[power]; })
-                .reduce( function(total, value) { return parseInt(total) + parseInt(value); }, 0 )
+                .reduce( function(total, value) {
+                    if (value === null || value === 'null') {
+                        // Some heroes have their stats set to null, so we return zero in this case.
+                        return parseInt(total) + 0; 
+                    } else {
+                        return parseInt(total) + parseInt(value);
+                    }
+                }, 0 )
     }
 
     const computeLeagueStats = () => {
@@ -37,11 +45,11 @@ function HeroLeague({league}) {
 
     return (
         <>
-            <h2>Hero Team</h2>
+            <h2>My hero league</h2>
             {
                 team.length > 0
                     ? (
-                        <div className="d-flex justify-content-center gridResults">
+                        <div className="gridResults">
                             {team.map( member => (<Hero key={member.id} sh={member} />) )}
                         </div>
                     )
@@ -51,7 +59,7 @@ function HeroLeague({league}) {
             {
                 matchPath && team.length > 0
                 ? (<>
-                    <h4>Team stats</h4>
+                    <h4>League stats</h4>
                     <ul>
                         {
                             <Powerstats powerstats={computeLeagueStats()}/>
