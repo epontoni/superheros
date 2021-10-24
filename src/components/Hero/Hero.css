@@ -1,0 +1,11 @@
+.bad {
+    border-color: #dc3546 !important;
+    background-color: #dc3546 !important;
+    box-shadow: 0px 5px 0px 0px #dc3546, 0px 10px 0px 0px #e74c3c;
+}
+
+.good {
+    border-color: #007aff !important;
+    background-color: #007aff !important;
+    box-shadow: 0px 5px 0px 0px #007aff, 0px 10px 0px 0px #17a2b7;
+}

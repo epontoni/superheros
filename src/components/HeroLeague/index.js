@@ -38,8 +38,6 @@ function HeroLeague({league}) {
         }
     }
 
-
-
     return (
         <>
             <h2>My hero league</h2>
@@ -56,13 +54,15 @@ function HeroLeague({league}) {
             {
                 matchPath && team.length > 0
                 ? (<>
-                    <h4>League stats</h4>
-                    <ul>
-                        {
-                            <Powerstats powerstats={computeLeagueStats()}/>
-                        }
-                        
-                    </ul>
+                    <fieldset className="mt-4">
+                        <legend>League stats</legend>
+                        <ul>
+                            {
+                                <Powerstats powerstats={computeLeagueStats()}/>
+                            }
+                            
+                        </ul>
+                    </fieldset>
                 </>)
                 : null
             }
