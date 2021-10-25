@@ -70,10 +70,16 @@ function Hero({sh}) {
         dispatch(eraseHero(heroId))
     }
 
+    const imgStyles = {
+        minHeight: '275px',
+        maxHeight: '350px',
+        objectFit: 'cover',
+    }
+
     return (
         <> 
             <Card className={"my-2 " + sh?.biography?.alignment } style={{maxWidth: '350px', margin: '0 auto'}}>
-                <Card.Img variant="top" src={ sh.image ? sh.image.url : ''} />
+                <Card.Img variant="top" src={ sh.image ? sh.image.url : ''} style={imgStyles} />
                 <Card.Body className="text-dark">
                     <Card.Title className="text-center">{sh.name}</Card.Title>
                     <div className="lead" style={{ fontSize: '1rem' }}>

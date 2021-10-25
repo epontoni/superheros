@@ -1,5 +1,5 @@
 # 🦸‍♂️Superheros app
-Find your favorite superheroes and form an invincible league. The league can only contain a maximum of six superheroes. Three of good orientation and three of bad orientation.
+Find your favorite superheroes and form an invincible league. The league can only contain a maximum of six superheroes. Three of good orientation (blues) and three of bad orientation (reds).
 
 Restrictions:
 You must be logged in to use the app, the credentials are:
